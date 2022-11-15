@@ -1,4 +1,10 @@
 # Assignment 2
+## Description
+In below Telegram message you will find the description of
+assignment and the definition of done 
+
+https://t.me/blockchainsbu22/14
+
 ## Setup venv
 * python3 -m venv development
 * source development/bin/activate
