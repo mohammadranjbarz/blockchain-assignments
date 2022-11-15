@@ -6,9 +6,9 @@ assignment and the definition of done
 https://t.me/blockchainsbu22/14
 
 ## Setup venv
-* python3 -m venv development
-* source development/bin/activate
-* pip3 install --upgrade pip
+* `python3 -m venv development`
+* `source development/bin/activate`
+* `pip3 install --upgrade pip`
 
 ## Install dependencies
 `pip3 install -r requirements.txt`
