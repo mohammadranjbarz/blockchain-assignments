@@ -15,7 +15,7 @@ properly or not you can run test cases
 
 `python3 src/main_test.py`
 
-### Useful resources
+## Useful resources
 * [Install and setup venv on mac OS](https://www.studytonight.com/post/python-virtual-environment-setup-on-mac-osx-easiest-way)
 
 * [RSA documentation page in cryptography docs](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa)
