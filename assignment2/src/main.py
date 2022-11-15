@@ -14,7 +14,7 @@ from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.backends import default_backend
 
 
-def generate_private_key(private_key_pass):
+def generate_key_pair(private_key_pass):
     private_key = rsa.generate_private_key(
         public_exponent=65537,
         key_size=4096,
@@ -67,19 +67,9 @@ def verify(public_key_pem, message, signed):
         return False
 
 
-private_key_pass = 'key secret'
-keys = generate_private_key(private_key_pass)
 
-# print('keys')
-# print(keys[0].decode("utf-8"))
-# print(keys[1].decode("utf-8"))
-
-print('**********')
-plain_text = 'hey you'
-signed = sign(keys[0],private_key_pass, plain_text)
-print('signed')
-print(signed)
-print('\n**********\n')
-print('verify result')
-
-print(verify(keys[1], plain_text, signed))
+__all__ = [
+    "generate_key_pair",
+    "sign",
+    "verify"
+    ]
