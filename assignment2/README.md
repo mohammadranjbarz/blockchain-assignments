@@ -21,6 +21,8 @@ properly or not you can run test cases
 
 `python3 src/main_test.py`
 
+**PS** It almost takes 10-20 seconds to pass tests on my computer
+
 ## Useful resources
 * [Install and setup venv on mac OS](https://www.studytonight.com/post/python-virtual-environment-setup-on-mac-osx-easiest-way)
 

@@ -6,6 +6,8 @@ from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.backends import default_backend
 
+from cryptography.hazmat.primitives import hashes
+
 
 def generate_key_pair(private_key_pass):
     private_key = rsa.generate_private_key(
@@ -26,7 +28,7 @@ def generate_key_pair(private_key_pass):
     return private_pem, public_pem
 
 
-def sign(private_key_pem,private_key_pass, message):
+def sign(private_key_pem, private_key_pass, message):
     private_key = serialization.load_pem_private_key(
         private_key_pem, password=bytes(private_key_pass, 'utf-8'), backend=default_backend())
     prehashed = hashlib.sha256(bytes(message, 'utf-8')).hexdigest()
@@ -60,9 +62,20 @@ def verify(public_key_pem, message, signed):
         return False
 
 
+def hash_block(block_data, block_number, nonce):
+    digest = hashes.Hash(hashes.SHA256())
+    digest.update(bytes(block_data, 'utf-8'))
+    digest.update(bytes(str(block_number), 'utf-8'))
+    digest.update(bytes(str(nonce), 'utf-8'))
+    return digest.finalize().hex()
 
-__all__ = [
-    "generate_key_pair",
-    "sign",
-    "verify"
-    ]
+
+def mine_block(block_data, block_number):
+    nonce = 0
+    block_hash = hash_block(block_data, block_number, nonce)
+
+    while not block_hash.startswith("0000"):
+        nonce = nonce + 1
+        block_hash = hash_block(block_data, block_number, nonce)
+        print(block_hash, nonce)
+    return block_hash, nonce
