@@ -10,6 +10,7 @@ from cryptography.hazmat.primitives import hashes
 
 
 def generate_key_pair(private_key_pass):
+    # https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/#generation
     private_key = rsa.generate_private_key(
         public_exponent=65537,
         key_size=4096,
@@ -29,6 +30,7 @@ def generate_key_pair(private_key_pass):
 
 
 def sign(private_key_pem, private_key_pass, message):
+    # https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/#signing
     private_key = serialization.load_pem_private_key(
         private_key_pem, password=bytes(private_key_pass, 'utf-8'), backend=default_backend())
     prehashed = hashlib.sha256(bytes(message, 'utf-8')).hexdigest()
@@ -43,6 +45,7 @@ def sign(private_key_pem, private_key_pass, message):
 
 
 def verify(public_key_pem, message, signed):
+    # https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/#verification
     try:
         public_key = serialization.load_pem_public_key(
             public_key_pem, backend=default_backend())
@@ -63,6 +66,7 @@ def verify(public_key_pem, message, signed):
 
 
 def hash_block(block_data, block_number, nonce):
+    # https://cryptography.io/en/latest/hazmat/primitives/cryptographic-hashes/#module-cryptography.hazmat.primitives.hashes
     digest = hashes.Hash(hashes.SHA256())
     digest.update(bytes(block_data, 'utf-8'))
     digest.update(bytes(str(block_number), 'utf-8'))
